@@ -37,6 +37,8 @@ jobs:
 
           docker-compose build
 
+          mkdir ../elk-data
+
       ########################################################
       #                                                      #
       # Ensure §"Initial setup" of the README remains valid. #
