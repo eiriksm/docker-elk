@@ -37,6 +37,8 @@ jobs:
 
           docker-compose build
 
+          mkdir ../elk-data
+
       ########################################################
       #                                                      #
       # Ensure §"Initial setup" of the README remains valid. #
@@ -58,11 +60,9 @@ jobs:
 
           docker-compose up -d elasticsearch
           source .github/workflows/scripts/lib/testing.sh
-          poll_ready "$(container_id elasticsearch)" "http://$(service_ip elasticsearch):9200/" -u 'elastic:changeme'
+          poll_ready "$(container_id elasticsearch)" "http://$(service_ip elasticsearch):9200/"
 
           # Set passwords
-
-          .github/workflows/scripts/elasticsearch-setup-passwords.exp
 
       ##########################################################
       #                                                        #
@@ -207,10 +207,6 @@ jobs:
           docker service scale elk_logstash=0 elk_kibana=0
           source .github/workflows/scripts/lib/testing.sh
           poll_ready "$(container_id elasticsearch)" "http://$(service_ip elasticsearch):9200/" -u 'elastic:changeme'
-
-          # Set passwords
-
-          .github/workflows/scripts/elasticsearch-setup-passwords.exp swarm
 
       ##########################################################
       #                                                        #
