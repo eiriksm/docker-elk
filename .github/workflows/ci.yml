@@ -208,10 +208,6 @@ jobs:
           source .github/workflows/scripts/lib/testing.sh
           poll_ready "$(container_id elasticsearch)" "http://$(service_ip elasticsearch):9200/" -u 'elastic:changeme'
 
-          # Set passwords
-
-          .github/workflows/scripts/elasticsearch-setup-passwords.exp swarm
-
       ##########################################################
       #                                                        #
       # Test core components: Elasticsearch, Logstash, Kibana. #
