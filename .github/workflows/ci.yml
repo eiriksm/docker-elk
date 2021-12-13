@@ -83,6 +83,8 @@ jobs:
 
           # Set passwords
 
+          #.github/workflows/scripts/elasticsearch-setup-passwords.exp
+
       ##########################################################
       #                                                        #
       # Test core components: Elasticsearch, Logstash, Kibana. #
