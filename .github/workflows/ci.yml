@@ -79,7 +79,7 @@ jobs:
 
           docker compose up -d elasticsearch
           source .github/workflows/scripts/lib/testing.sh
-          poll_ready "$(container_id elasticsearch)" "http://$(service_ip elasticsearch):9200/"
+          poll_ready "$(container_id elasticsearch)" "http://localhost:9200/"
 
           # Set passwords
 
