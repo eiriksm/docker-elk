@@ -16,7 +16,6 @@ services:
         target: /usr/share/elasticsearch/data
     ports:
       - "127.0.0.1:9200:9200"
-      - "172.18.0.2:9600:9200"
       - "127.0.0.1:9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx2048m -Xms2048m"
