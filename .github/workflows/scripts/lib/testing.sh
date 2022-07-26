@@ -88,7 +88,7 @@ function poll_ready {
 	local cid=$1
 	local url=$2
 
-	local -a args=( '-s' '-D-' '-m3' '-v' '-w' '%{http_code}' "$url" )
+	local -a args=( '-s' '-D-' '-m3' '-w' '%{http_code}' "$url" )
 	if [ "$#" -ge 3 ]; then
 		args+=( ${@:3} )
 	fi
@@ -108,7 +108,7 @@ function poll_ready {
 		fi
 
 		output="$(curl "${args[@]}" || true)"
-                echo $output
+                #echo $output
 		if [ "${output: -3}" -eq 200 ]; then
 			result=0
 			break
