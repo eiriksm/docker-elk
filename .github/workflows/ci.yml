@@ -77,9 +77,11 @@ jobs:
 
           # Run Elasticsearch and wait for its availability
 
+          sed -i 's/127.0.0.1/0.0.0.0/g' docker-compose.yml
+          git diff
           docker compose up -d elasticsearch
           source .github/workflows/scripts/lib/testing.sh
-          poll_ready "$(container_id elasticsearch)" "http://"$(container_ip elasticsearch)":9200/"
+          poll_ready "$(container_id elasticsearch)" "http://"$(service_ip elasticsearch)":9200/"
 
           # Set passwords
 
