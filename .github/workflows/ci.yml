@@ -46,6 +46,9 @@ jobs:
           # Pre-build container images
           sed -i 's/127.0.0.1\://g' docker-compose.yml
 
+          mkdir ../elk-data
+          chmod 777 ../elk-data
+
           docker compose \
             -f docker-compose.yml \
             -f extensions/logspout/logspout-compose.yml \
@@ -54,8 +57,7 @@ jobs:
             -f extensions/metricbeat/metricbeat-compose.yml \
             -f extensions/filebeat/filebeat-compose.yml \
             build
-
-          mkdir ../elk-data
+          
 
       ########################################################
       #                                                      #
