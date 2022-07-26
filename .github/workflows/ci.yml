@@ -48,7 +48,6 @@ jobs:
 
           mkdir ../elk-data
           chmod 777 ../elk-data
-          cp logstash/pipeline/logstash.old logstash/pipeline/logstash.conf
 
           docker compose \
             -f docker-compose.yml \
