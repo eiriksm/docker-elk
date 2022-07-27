@@ -108,7 +108,6 @@ function poll_ready {
 		fi
 
 		output="$(curl "${args[@]}" || true)"
-                #echo $output
 		if [ "${output: -3}" -eq 200 ]; then
 			result=0
 			break
