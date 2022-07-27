@@ -85,7 +85,7 @@ jobs:
 
           # Set passwords
 
-          .github/workflows/scripts/elasticsearch-setup-passwords.exp
+          #.github/workflows/scripts/elasticsearch-setup-passwords.exp
 
       ##########################################################
       #                                                        #
