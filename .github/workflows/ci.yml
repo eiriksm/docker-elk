@@ -58,7 +58,6 @@ jobs:
             -f extensions/filebeat/filebeat-compose.yml \
             build
           
-
       ########################################################
       #                                                      #
       # Ensure §"Initial setup" of the README remains valid. #
