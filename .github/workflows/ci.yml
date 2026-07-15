@@ -73,7 +73,10 @@ jobs:
       - name: Execute core test suite
         run: |
           docker compose up -d
-          .github/workflows/scripts/run-tests-core.sh
+          .github/workflows/scripts/run-tests-core.sh || {
+            docker compose logs elasticsearch logstash
+            exit 1
+          }
           # next steps don't need Logstash
           docker compose stop logstash
 

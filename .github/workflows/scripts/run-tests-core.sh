@@ -29,6 +29,10 @@ endgroup
 
 log 'Sending message to Logstash TCP input'
 
+# Matches the dated index name produced by logstash/pipeline/beats.conf's
+# 'logstash-new-%{+yyyy.MM.dd}' output (Logstash formats dates in UTC).
+declare -r ls_index="logstash-new-$(date -u +%Y.%m.%d)"
+
 declare -i was_retried=0
 
 # retry for max 10s (5*2s)
@@ -47,7 +51,7 @@ if ((was_retried)); then
 fi
 
 declare -a refresh_args=( '-X' 'POST' '-s' '-w' '%{http_code}' '-u' 'elastic:testpasswd'
-	'http://elasticsearch:9200/logstash-new-*/_refresh'
+	"http://elasticsearch:9200/${ls_index}/_refresh"
 	'--resolve' "elasticsearch:9200:${ip_es}"
 )
 
@@ -87,7 +91,7 @@ EOD
 )
 
 declare -a search_args=( '-s' '-u' 'elastic:testpasswd'
-	'http://elasticsearch:9200/logstash-new-*/_search?pretty'
+	"http://elasticsearch:9200/${ls_index}/_search?pretty"
 	'--resolve' "elasticsearch:9200:${ip_es}"
 	'-H' 'Content-Type: application/json'
 	'-d' "${query}"
