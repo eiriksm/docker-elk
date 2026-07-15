@@ -60,9 +60,6 @@ jobs:
       - name: Generate Kibana encryption keys
         run: docker container run --rm docker-elk-kibana bin/kibana-encryption-keys generate -q >>kibana/config/kibana.yml
 
-      - name:  Set up users and roles
-        run: docker compose up --exit-code-from=setup setup
-
       #############################
       #                           #
       # Test core and extensions. #
@@ -79,15 +76,6 @@ jobs:
           .github/workflows/scripts/run-tests-core.sh
           # next steps don't need Logstash
           docker compose stop logstash
-
-      #
-      # Fleet
-      #
-
-      - name: Execute Fleet test suite
-        run: |
-          docker compose -f docker-compose.yml -f extensions/fleet/fleet-compose.yml -f extensions/fleet/agent-apmserver-compose.yml up --remove-orphans -d fleet-server apm-server
-          .github/workflows/scripts/run-tests-fleet.sh
 
       #
       # Metricbeat

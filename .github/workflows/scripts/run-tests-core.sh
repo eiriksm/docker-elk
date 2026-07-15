@@ -47,7 +47,7 @@ if ((was_retried)); then
 fi
 
 declare -a refresh_args=( '-X' 'POST' '-s' '-w' '%{http_code}' '-u' 'elastic:testpasswd'
-	'http://elasticsearch:9200/logs-generic-default/_refresh'
+	'http://elasticsearch:9200/logstash-new-*/_refresh'
 	'--resolve' "elasticsearch:9200:${ip_es}"
 )
 
@@ -87,7 +87,7 @@ EOD
 )
 
 declare -a search_args=( '-s' '-u' 'elastic:testpasswd'
-	'http://elasticsearch:9200/logs-generic-default/_search?pretty'
+	'http://elasticsearch:9200/logstash-new-*/_search?pretty'
 	'--resolve' "elasticsearch:9200:${ip_es}"
 	'-H' 'Content-Type: application/json'
 	'-d' "${query}"
